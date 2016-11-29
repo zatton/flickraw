@@ -51,8 +51,19 @@ module FlickRaw
       @oauth_consumer.ca_path = FlickRaw.ca_path
       @oauth_consumer.user_agent = USER_AGENT
       @access_token = @access_secret = nil
+
+      methods = call('flickr.reflection.getMethods').push(
+        'flickr.collections.create',
+        'flickr.collections.sortCollections',
+        'flickr.collections.editSets',
+        'flickr.collections.createIcon',
+        'flickr.collections.removeSet',
+        'flickr.collections.delete',
+        'flickr.collections.moveCollection',
+        'flickr.collections.editMeta'
+      )
       
-      Flickr.build(call('flickr.reflection.getMethods')) if Flickr.flickr_objects.empty?
+      Flickr.build(methods) if Flickr.flickr_objects.empty?
       super self
     end
     
