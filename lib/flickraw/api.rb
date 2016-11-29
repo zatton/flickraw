@@ -1,4 +1,5 @@
 module FlickRaw
+
   END_POINT='http://api.flickr.com/services'.freeze
   END_POINT2='http://www.flickr.com/services'.freeze
   END_POINT_SECURE='https://api.flickr.com/services'.freeze
@@ -52,7 +53,7 @@ module FlickRaw
       @oauth_consumer.user_agent = USER_AGENT
       @access_token = @access_secret = nil
 
-      methods = call('flickr.reflection.getMethods').push(
+      methods = call('flickr.reflection.getMethods').to_a.push(
         'flickr.collections.create',
         'flickr.collections.sortCollections',
         'flickr.collections.editSets',
